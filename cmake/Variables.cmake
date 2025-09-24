@@ -1,0 +1,20 @@
+set(launcher_NAME "POCLauncher" CACHE STRING "The PascalCase name of the launcher")
+set(launcher_DISPLAY_NAME "POC Launcher" CACHE STRING "The friendly display name of the launcher")
+
+set(launcher_HELP_URL "https://prismlauncher.org/wiki/help-pages/%1" CACHE STRING "URL for launcher help action (%1 replaced with page name)")
+set(launcher_BUG_TRACKER_URL "https://github.com/TheKodeToad/poclauncher/issues" CACHE STRING "URL for the bug tracker")
+set(launcher_MATRIX_URL "https://prismlauncher.org/matrix" CACHE STRING "Matrix URL")
+set(launcher_DISCORD_URL "https://prismlauncher.org/discord" CACHE STRING "Discord URL")
+set(launcher_SUBREDDIT_URL "https://prismlauncher.org/reddit" CACHE STRING "Subreddit URL")
+set(launcher_SOURCE_CODE_URL "https://github.com/TheKodeToad/poclauncher" CACHE STRING "Subreddit URL")
+set(launcher_VERSION_MAJOR 1)
+set(launcher_VERSION_MINOR 0)
+set(launcher_VERSION_PATCH 0)
+
+string(TIMESTAMP TODAY "%Y-%m-%d")
+set(Launcher_BUILD_DATE "${TODAY}")
+set(launcher_BUILD_PLATFORM "Unknown" CACHE STRING "A short string - shown in the about dialog - identifying the platform that this build was built for")
+
+include(GetGitRevisionDescription)
+git_get_exact_tag(Launcher_GIT_TAG)
+get_git_head_revision(Launcher_GIT_REFSPEC Launcher_GIT_COMMIT)
