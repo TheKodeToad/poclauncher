@@ -12,9 +12,9 @@ set(launcher_VERSION_MINOR 0)
 set(launcher_VERSION_PATCH 0)
 
 string(TIMESTAMP TODAY "%Y-%m-%d")
-set(Launcher_BUILD_DATE "${TODAY}")
+set(launcher_BUILD_DATE ${TODAY})
 set(launcher_BUILD_PLATFORM "Unknown" CACHE STRING "A short string - shown in the about dialog - identifying the platform that this build was built for")
 
 include(GetGitRevisionDescription)
-git_get_exact_tag(Launcher_GIT_TAG)
-get_git_head_revision(Launcher_GIT_REFSPEC Launcher_GIT_COMMIT)
+git_get_exact_tag(launcher_GIT_TAG)
+get_git_head_revision(launcher_GIT_REFSPEC launcher_GIT_COMMIT)

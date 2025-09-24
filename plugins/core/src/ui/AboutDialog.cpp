@@ -46,25 +46,24 @@
 
 using namespace Qt::Literals;
 
-namespace {
-QString getLink(QString link, QString name)
+static QString getLink(QString link, QString name)
 {
     return u"&lt;<a href='%1'>%2</a>&gt;"_s.arg(link).arg(name);
 }
 
-QString getWebsite(QString link)
+static QString getWebsite(QString link)
 {
     return getLink(link, QObject::tr("Website"));
 }
 
-QString getGitHub(QString username)
+static QString getGitHub(QString username)
 {
     return getLink(u"https://github.com/"_s + username, u"GitHub"_s);
 }
 
 // Credits
 // This is a hack, but I can't think of a better way to do this easily without screwing with QTextDocument...
-QString getCreditsHtml()
+static QString getCreditsHtml()
 {
     QString output;
     QTextStream stream(&output);
@@ -123,7 +122,7 @@ QString getCreditsHtml()
     return output;
 }
 
-QString getLicenseHtml()
+static QString getLicenseHtml()
 {
     QFile dataFile(u":/documents/COPYING.md"_s);
     dataFile.open(QIODevice::ReadOnly);
@@ -131,8 +130,6 @@ QString getLicenseHtml()
     QString output = markdownToHTMLUTF8(fileContent);
     return output;
 }
-
-}  // namespace
 
 AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutDialog)
 {
