@@ -68,7 +68,6 @@
     <property name="toolTipsVisible">
      <bool>true</bool>
     </property>
-    <addaction name="actionSettings"/>
     <addaction name="actionCloseWindow"/>
    </widget>
    <widget class="QMenu" name="editMenu">
@@ -135,21 +134,6 @@
    </property>
    <property name="text">
     <string>Lock Toolbars</string>
-   </property>
-  </action>
-  <action name="actionSettings">
-   <property name="icon">
-    <iconset theme="settings">
-     <normaloff>.</normaloff>.</iconset>
-   </property>
-   <property name="text">
-    <string>Setti&amp;ngs...</string>
-   </property>
-   <property name="toolTip">
-    <string>Change settings.</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
   <action name="actionCloseWindow">
