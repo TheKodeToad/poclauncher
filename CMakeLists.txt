@@ -5,6 +5,13 @@ project(Launcher)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 include(GetGitRevisionDescription)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(cmark REQUIRED)
+
 set(Launcher_NAME "POCLauncher")
 set(Launcher_BINARY_NAME "poclauncher")
 set(Launcher_DISPLAY_NAME "POC Launcher" CACHE STRING "The friendly display name of the launcher")
@@ -29,22 +36,17 @@ set(Launcher_BUILD_PLATFORM "Unknown" CACHE STRING "A short string - shown in th
 git_get_exact_tag(Launcher_GIT_TAG)
 get_git_head_revision(Launcher_GIT_REFSPEC Launcher_GIT_COMMIT)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS -fsanitize=address,leak)
-
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-find_package(cmark REQUIRED)
-
 add_subdirectory(Core)
 add_subdirectory(NewsPlugin)
 
-qt_standard_project_setup()
-qt_add_executable(${Launcher_BINARY_NAME} main.cpp)
+add_executable(${Launcher_BINARY_NAME} main.cpp)
+add_library(${Launcher_BINARY_NAME}_lib SHARED main.cpp) # HACK: this gets around needing a ousrce file for now lol
 
-target_link_libraries(${Launcher_BINARY_NAME} PRIVATE Qt6::Widgets Core)
+target_link_libraries(${Launcher_BINARY_NAME} PRIVATE ${Launcher_BINARY_NAME}_lib)
+target_link_libraries(${Launcher_BINARY_NAME}_lib PRIVATE "$<LINK_LIBRARY:WHOLE_ARCHIVE,Core>")
 
 set_target_properties(${Launcher_BINARY_NAME} PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
 )
+set_target_properties(${Launcher_BINARY_NAME}_lib PROPERTIES OUTPUT_NAME ${Launcher_BINARY_NAME})

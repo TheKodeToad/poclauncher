@@ -14,6 +14,12 @@
 
 using namespace Qt::Literals;
 
+int coreMain(int argc, char** argv)
+{
+    Application app(argc, argv);
+    return app.run();
+}
+
 struct Application::Data {
     QString rootPath;
     bool portable = false;
@@ -41,7 +47,6 @@ bool Application::portable() const
 
 int Application::run()
 {
-    setOrganizationName(BuildConfig::LAUNCHER_NAME);
     setOrganizationDomain(BuildConfig::LAUNCHER_DOMAIN);
     setApplicationName(BuildConfig::LAUNCHER_NAME);
     setApplicationDisplayName(BuildConfig::LAUNCHER_DISPLAYNAME + ' '_L1 + BuildConfig::VERSION_STRING);

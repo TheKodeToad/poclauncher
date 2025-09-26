@@ -1,3 +1,3 @@
 #include <QtPlugin>
 
-Q_IMPORT_PLUGIN(TestPlugin);
+Q_IMPORT_PLUGIN(NewsPlugin);
