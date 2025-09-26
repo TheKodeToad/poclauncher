@@ -46,6 +46,7 @@ secrets/
 run/
 
 .cache/
+.ccls-cache/
 
 # Nix/NixOS
 .direnv/
