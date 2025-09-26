@@ -30,14 +30,14 @@ Application::Application(int& argc, char** argv) : QApplication(argc, argv), m_d
 
 Application::~Application() {}
 
-PluginLoader* Application::pluginLoader()
+PluginLoader& Application::pluginLoader()
 {
-    return &m_data->pluginLoader;
+    return m_data->pluginLoader;
 }
 
-const PluginLoader* Application::pluginLoader() const
+const PluginLoader& Application::pluginLoader() const
 {
-    return &m_data->pluginLoader;
+    return m_data->pluginLoader;
 }
 
 bool Application::portable() const

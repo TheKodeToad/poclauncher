@@ -13,8 +13,9 @@ class Application : public QApplication {
     ~Application();
     int run();
 
-    PluginLoader* pluginLoader();
-    const PluginLoader* pluginLoader() const;
+    PluginLoader& pluginLoader();
+    const PluginLoader& pluginLoader() const;
+
     bool portable() const;
 
    private:
