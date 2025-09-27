@@ -11,8 +11,11 @@ qt_add_library(${PROJECT_NAME} STATIC
 	include/Core/util/Markdown.h
 	include/Core/util/MessageBox.h
 
+	res/icons/multimc/multimc.qrc
+
 	src/Application.cpp
 	src/BuildConfig.cpp
+	src/main.cpp
 	src/PluginLoader.cpp
 	src/StaticPluginImports.cpp
 	src/ui/AboutDialog.h
