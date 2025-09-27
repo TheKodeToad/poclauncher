@@ -44,9 +44,10 @@
 #include <QToolButton>
 #include <QUrl>
 
-#include "./AboutDialog.h"
-#include "./MainWindow.h"
+#include "AboutDialog.h"
+#include "Application.h"
 #include "BuildConfig.h"
+#include "MainWindow.h"
 #include "ui_MainWindow.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), m_ui(new Ui::MainWindow)

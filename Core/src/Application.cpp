@@ -15,9 +15,10 @@
 using namespace Qt::Literals;
 
 struct Application::Data {
+    PluginLoader pluginLoader;
+    QIcon logo;
     QString rootPath;
     bool portable = false;
-    PluginLoader pluginLoader;
 };
 
 Application::Application(int& argc, char** argv) : QApplication(argc, argv), m_data(std::make_unique<Data>()) {}
@@ -46,6 +47,7 @@ int Application::run()
     setApplicationDisplayName(BuildConfig::LAUNCHER_DISPLAYNAME + ' '_L1 + BuildConfig::VERSION_STRING);
     setApplicationVersion(BuildConfig::VERSION_STRING + '\n'_L1 + BuildConfig::GIT_COMMIT);
     setDesktopFileName(BuildConfig::LAUNCHER_APPID);
+    setWindowIcon(QIcon(":/icons/logo.svg"_L1));
 
     QIcon::setThemeSearchPaths(QIcon::themeSearchPaths() << u":/icons"_s);
     QIcon::setThemeName(u"multimc"_s);

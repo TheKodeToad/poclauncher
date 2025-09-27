@@ -4,6 +4,7 @@
 #include <memory>
 
 class PluginLoader;
+class QIcon;
 
 #define APPLICATION ((Application*)QApplication::instance())
 

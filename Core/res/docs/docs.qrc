@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/docs">
+		<file>credits.html</file>
+		<file>../../../COPYING.md</file>
+	</qresource>
+</RCC>
