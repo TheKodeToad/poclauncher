@@ -26,6 +26,7 @@ qt_add_library(${PROJECT_NAME} STATIC
 	src/ui/MainWindow.h
 	src/ui/MainWindow.cpp
 	src/ui/MainWindow.ui
+	src/util/DesktopServices.cpp
 	src/util/Markdown.cpp
 	src/util/MessageBox.cpp
 )

@@ -40,24 +40,35 @@
 
 #include <QApplication>
 #include <QDesktopServices>
+#include <QKeySequence>
 #include <QPushButton>
+#include <QString>
 #include <QToolButton>
 #include <QUrl>
 
 #include "AboutDialog.h"
-#include "Application.h"
 #include "BuildConfig.h"
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
+#include "util/DesktopServices.h"
+
+using namespace Qt::Literals;
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), m_ui(new Ui::MainWindow)
 {
     m_ui->setupUi(this);
 
-    m_ui->statusBar->hide();
-
     setWindowTitle(QApplication::applicationDisplayName());
     setUnifiedTitleAndToolBarOnMac(true);
+
+    m_ui->actionQuit->setShortcut(QKeySequence::Quit);
+#if Q_OS_WINDOWS
+    m_ui->actionQuit->setText(tr("Exit"));
+#endif
+
+    connect(m_ui->actionQuit, &QAction::triggered, this, &QMainWindow::close, Qt::QueuedConnection);
+
+    connect(m_ui->actionViewLauncherRootFolder, &QAction::triggered, this, [this] { DesktopServices::openPath(u"."_s); });
 
     connect(m_ui->actionReportBug, &QAction::triggered, this, [] { QDesktopServices::openUrl(QUrl(BuildConfig::BUG_TRACKER_URL)); });
     connect(m_ui->actionMATRIX, &QAction::triggered, this, [] { QDesktopServices::openUrl(QUrl(BuildConfig::MATRIX_URL)); });
@@ -69,10 +80,13 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), m_ui(new Ui::Main
     connect(m_ui->actionToggleStatusBar, &QAction::triggered, statusBar(), &QStatusBar::setVisible);
     connect(m_ui->actionLockToolbars, &QAction::triggered, this, &MainWindow::setToolbarsLocked);
 
-    m_ui->actionHelpButton->setMenu(m_ui->helpMenu);
+    auto foldersMenuButton = static_cast<QToolButton*>(m_ui->mainToolBar->widgetForAction(m_ui->actionFoldersButton));
+    foldersMenuButton->setPopupMode(QToolButton::InstantPopup);
+    m_ui->actionFoldersButton->setMenu(m_ui->foldersMenu);
 
     auto helpMenuButton = static_cast<QToolButton*>(m_ui->mainToolBar->widgetForAction(m_ui->actionHelpButton));
     helpMenuButton->setPopupMode(QToolButton::InstantPopup);
+    m_ui->actionHelpButton->setMenu(m_ui->helpMenu);
 
     retranslate();
 }

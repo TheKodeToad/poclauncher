@@ -68,7 +68,7 @@
     <property name="toolTipsVisible">
      <bool>true</bool>
     </property>
-    <addaction name="actionCloseWindow"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="editMenu">
     <property name="title">
@@ -124,6 +124,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Status Bar</string>
    </property>
@@ -136,12 +139,12 @@
     <string>Lock Toolbars</string>
    </property>
   </action>
-  <action name="actionCloseWindow">
+  <action name="actionQuit">
    <property name="icon">
     <iconset theme="status-bad"/>
    </property>
    <property name="text">
-    <string>Close &amp;Window</string>
+    <string>&amp;Quit</string>
    </property>
    <property name="toolTip">
     <string>Close the current window</string>
